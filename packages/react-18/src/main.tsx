@@ -1,5 +1,6 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
+import ContextExample from './ContextExample';
 
 import StateHookExample1 from './StateHookExample1';
 import StateHookExample2 from './StateHookExample2';
@@ -11,5 +12,6 @@ root.render(
   <StrictMode>
     <StateHookExample1 />
     <StateHookExample2 />
+    <ContextExample />
   </StrictMode>
 );
