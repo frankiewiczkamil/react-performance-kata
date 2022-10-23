@@ -1,17 +1,18 @@
-import { StrictMode } from 'react';
+import {StrictMode} from 'react';
 import * as ReactDOM from 'react-dom/client';
-import ReducerExample from './ReducerExample';
+import "./styles.css"
 
-import StateHookExample1 from './StateHookExample1';
-import StateHookExample2 from './StateHookExample2';
+import StateHookExample3 from './StateHookExample3';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <StrictMode>
-    <StateHookExample1 />
-    <StateHookExample2 />
-    <ReducerExample />
+    {/*<StateHookExample1/>*/}
+    {/*<StateHookExample2/>*/}
+    <StateHookExample3/>
+    {/*<ReducerExample />*/}
+
   </StrictMode>
 );
