@@ -13,11 +13,15 @@ export default function () {
 function SlowComponent(props: { under10: boolean; increase: MouseEventHandler<HTMLButtonElement> | undefined; }) {
     console.log("render component", props.under10);
     return (
-        <div style={{ display: "inline-block", padding: '1rem' }}>
-            <div>useReducer</div>
-            <div>using dispatch function just like in redux</div>
-            {props.under10 ? <p>under 10 </p> : <p>above 10 </p>}
-            <button onClick={props.increase}>Click me</button>
+        <div className="example__container">
+            <div className="example__label">
+                <div>useReducer</div>
+                <div>using dispatch function just like in redux</div>
+            </div>
+            <div className="example__button">
+                {props.under10 ? <p>under 10 </p> : <p>above 10 </p>}
+                <button onClick={props.increase}>increment</button>
+            </div>
         </div>
     );
 }

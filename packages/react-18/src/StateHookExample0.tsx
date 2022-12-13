@@ -11,11 +11,16 @@ export default function () {
 function SlowComponent(props: { isUnder10: boolean; increase: MouseEventHandler<HTMLButtonElement>; }) {
   console.log("render child component", props.isUnder10);
   return (
-    <div style={{ display: "inline-block", padding: '1rem' }}>
-      <div>useState</div>
-      <div>handler function is re-initialized on each run and passed as a prop</div>
-      {props.isUnder10 ? <p>under 10 </p> : <p>above 10 </p>}
-      <button onClick={props.increase}>Click me</button>
+    <div className="example__container">
+      <div className="example__label">
+        <div>useState - the problem</div>
+        <div>handler function is re-initialized on each run and passed as a prop</div>
+      </div>
+      <div className="example__button">
+        {props.isUnder10 ? <div >under 10 </div> : <div>above 10 </div>}
+        <button onClick={props.increase}>increment</button>
+      </div>
+
     </div>
   );
 }

@@ -2,4 +2,19 @@
 body {
   background-color: black;
   color: white;
+  box-sizing: border-box;
+}
+
+.example__container {
+  padding: 1rem;
+}
+
+.example__label {
+  display: inline-block;
+  width: 50%;
+}
+
+.example__button {
+  display: inline-block;
+  width: 20%;
 }

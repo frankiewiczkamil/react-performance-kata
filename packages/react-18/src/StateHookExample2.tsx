@@ -17,13 +17,16 @@ export default function () {
 function SlowComponent(props: { isUnder10: boolean }) {
   console.log("render component", props.isUnder10);
   return (
-    <div style={{ display: "inline-block", padding: '1rem' }}>
-      <div>useState</div>
-      <div>handler function is a ref to a function that changes under the hood</div>
-      <div>accessed directly because it's in visible scope</div>
-
-      {props.isUnder10 ? <p>under 10 </p> : <p>above 10 </p>}
-      <button onClick={increaseRef}>Click me</button>
+    <div className="example__container">
+      <div className="example__label">
+        <div>useState - workaround 2: </div>
+        <div>handler function is a ref to a function that changes under the hood</div>
+        <div>accessed directly because it's in visible scope</div>
+      </div>
+      <div className="example__button">
+        {props.isUnder10 ? <p>under 10 </p> : <p>above 10 </p>}
+        <button onClick={increaseRef}>increment</button>
+      </div>
     </div>
   );
 }

@@ -20,11 +20,15 @@ export default function () {
 function SlowComponent({ isUnder10, increase }: { isUnder10: boolean, increase: () => void }) {
   console.log("render component", isUnder10);
   return (
-    <div style={{ display: "inline-block", padding: '1rem' }}>
-      <div>useState + custom hook (useRef+useCallback) </div>
-      <div>it mimics class component methods</div>
-      {isUnder10 ? <p>under 10 </p> : <p>above 10 </p>}
-      <button onClick={increase}>Click me</button>
+    <div className="example__container">
+      <div className="example__label">
+        <div>useState + custom hook (useRef+useCallback) </div>
+        <div>it mimics class component methods</div>
+      </div>
+      <div className="example__button">
+        {isUnder10 ? <p>under 10 </p> : <p>above 10 </p>}
+        <button onClick={increase}>increment</button>
+      </div>
     </div>
   );
 }
