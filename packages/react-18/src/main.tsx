@@ -5,6 +5,7 @@ import "./styles.css"
 import { ClazzContainer } from './ClazzContainer';
 import StateHookExample0 from './StateHookExample0';
 import StateHookExample1 from './StateHookExample1';
+import StateHookWithUseCallbackAndClosure from './StateHookWithUseCallbackAndClosure';
 import StateHookExample2 from './StateHookExample2';
 import StateHookExample3 from './StateHookExample3';
 import ReducerExample from './ReducerExample';
@@ -19,6 +20,7 @@ root.render(
       <ClazzContainer />
       <StateHookExample0 />
       <StateHookExample1 />
+      <StateHookWithUseCallbackAndClosure />
       <StateHookExample2 />
       <StateHookExample3 />
       <ReducerExample />
