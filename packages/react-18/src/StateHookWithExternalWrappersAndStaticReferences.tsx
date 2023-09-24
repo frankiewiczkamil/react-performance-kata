@@ -10,11 +10,11 @@ const incrementRef = () => currentIncrementCallback();
 const decrementRef = () => currentDecrementCallback();
 
 export default function () {
-  console.log('render container');
   const [count, setCount] = useState(0);
   currentIncrementCallback = () => setCount(count + 1);
   currentDecrementCallback = () => setCount(count - 1);
 
+  console.log('render container', count);
   return (
     <div className="example__container">
       <div className="example__label">

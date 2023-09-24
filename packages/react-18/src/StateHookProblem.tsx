@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { MemoizedChildComponent, THRESHOLD } from './common';
 
 export default function () {
-  console.log('render container');
   const [count, setCount] = useState(0);
   const increment = () => setCount(count + 1); // <- creates new reference on every run (!)
   const decrement = () => setCount(count - 1); // <- creates new reference on every run (!)
+  console.log('render container', count);
   return (
     <div className="example__container">
       <div className="example__label">

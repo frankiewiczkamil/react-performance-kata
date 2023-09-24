@@ -22,7 +22,7 @@ export default function () {
   const functions = createFunctions(count, setCount);
   const increment = useCallback(functions.increment, []);
   const decrement = useCallback(functions.decrement, []);
-  console.log('render container');
+  console.log('render container', count);
   return (
     <div className="example__container">
       <div className="example__label">

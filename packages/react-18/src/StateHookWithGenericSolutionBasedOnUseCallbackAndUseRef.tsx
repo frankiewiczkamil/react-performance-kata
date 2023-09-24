@@ -10,10 +10,10 @@ const useCommand: UseCommand = (callback) => {
 };
 
 export default function () {
-  console.log('render container');
   const [count, setCount] = useState(0);
   const increment = useCommand(() => setCount(count + 1));
   const decrement = useCommand(() => setCount(count - 1));
+  console.log('render container', count);
   return (
     <div className="example__container">
       <div className="example__label">
