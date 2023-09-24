@@ -1,35 +1,31 @@
-import { useState, memo, MouseEventHandler } from "react";
+import React, { useState } from 'react';
+import { MemoizedChildComponent, THRESHOLD } from './common';
 
-let currentIncreaseCallback = () => {
-};
+// function impl changes
+let currentIncrementCallback = () => {};
+let currentDecrementCallback = () => {};
 
-// this reference does not change
-const increaseRef = () => currentIncreaseCallback();
+// wrappers (references) below do not change
+const incrementRef = () => currentIncrementCallback();
+const decrementRef = () => currentDecrementCallback();
 
 export default function () {
-  console.log("render container");
+  console.log('render container');
   const [count, setCount] = useState(0);
-  currentIncreaseCallback = () => setCount(count + 1);
-  const isUnder10 = count < 10;
-  return <MemoizedComponent isUnder10={isUnder10} increase={increaseRef} />;
-}
+  currentIncrementCallback = () => setCount(count + 1);
+  currentDecrementCallback = () => setCount(count - 1);
 
-function SlowComponent(props: { isUnder10: boolean; increase: MouseEventHandler<HTMLButtonElement>; }) {
-  console.log("render component", props.isUnder10);
   return (
     <div className="example__container">
       <div className="example__label">
-        <div>useState - workaround 1: </div>
-        <div>handler function is a ref to a function that changes under the hood</div>
-        <div>accessed though props</div>
+        <div>{count}</div>
+        <div>external wrappers with static references</div>
       </div>
-      <div className="example__button">
-        {props.isUnder10 ? <p>under 10 </p> : <p>above 10 </p>}
-        <button onClick={props.increase}>increment</button>
-      </div>
-
+      <MemoizedChildComponent
+        isBelowThreshold={count < THRESHOLD}
+        increment={incrementRef}
+        decrement={decrementRef}
+      />
     </div>
   );
 }
-
-const MemoizedComponent = memo(SlowComponent);

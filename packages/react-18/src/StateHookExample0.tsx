@@ -1,28 +1,26 @@
-import { useState, memo, MouseEventHandler } from "react";
+import React, { useState } from 'react';
+import { MemoizedChildComponent, THRESHOLD } from './common';
 
 export default function () {
-  console.log("render container");
+  console.log('render container');
   const [count, setCount] = useState(0);
-  const increase = () => setCount(count + 1); // <- create new instance on every run (!)
-  const isUnder10 = count < 10;
-  return <MemoizedComponent isUnder10={isUnder10} increase={increase} />;
-}
-
-function SlowComponent(props: { isUnder10: boolean; increase: MouseEventHandler<HTMLButtonElement>; }) {
-  console.log("render child component", props.isUnder10);
+  const increment = () => setCount(count + 1); // <- creates new reference on every run (!)
+  const decrement = () => setCount(count - 1); // <- creates new reference on every run (!)
   return (
     <div className="example__container">
       <div className="example__label">
-        <div>useState - the problem</div>
-        <div>handler function is re-initialized on each run and passed as a prop</div>
+        <div>{count}</div>
+        <div>plain useState - the problem</div>
+        <div>
+          callback functions for increment/decrement get new value and new
+          REFERENCE on each run
+        </div>
       </div>
-      <div className="example__button">
-        {props.isUnder10 ? <div >under 10 </div> : <div>above 10 </div>}
-        <button onClick={props.increase}>increment</button>
-      </div>
-
+      <MemoizedChildComponent
+        isBelowThreshold={count < THRESHOLD}
+        increment={increment}
+        decrement={decrement}
+      />
     </div>
   );
 }
-
-const MemoizedComponent = memo(SlowComponent);

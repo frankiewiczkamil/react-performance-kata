@@ -1,37 +1,46 @@
-import {useState, memo, MouseEventHandler, useCallback} from "react";
+import { useCallback, useState } from 'react';
+import { MemoizedChildComponent, THRESHOLD } from './common';
 
-function createIncrease( initialCount: number, setCount: Function){
+function createFunctions(initialCount: number, setCount: Function) {
   let _count = initialCount; // closure
-  return () => {
-    _count++;
-    console.log("increase", _count);
-    setCount(_count);
-  }
+  return {
+    increment: () => {
+      _count++;
+      console.log('increase', _count);
+      setCount(_count);
+    },
+    decrement: () => {
+      _count--;
+      console.log('increase', _count);
+      setCount(_count);
+    },
+  };
 }
+
 export default function () {
   const [count, setCount] = useState(0);
-  const increase = useCallback(createIncrease(count, setCount), []);
-  console.log("render container");
-  const isUnder10 = count < 10;
-  return <MemoizedComponent isUnder10={isUnder10} increase={increase} />;
-}
-
-function SlowComponent(props: { isUnder10: boolean; increase: MouseEventHandler }) {
-  console.log("render component");
+  const functions = createFunctions(count, setCount);
+  const increment = useCallback(functions.increment, []);
+  const decrement = useCallback(functions.decrement, []);
+  console.log('render container');
   return (
     <div className="example__container">
       <div className="example__label">
-        <div>useState fixed with useCallback + function closure, accessed through props</div>
-        <div>problematic state is passed to the factory function where it is copied so it can be used via lexical scope by the increase function</div>
-        <div>it requires it to be the only one place where state is changed</div>
+        <div>{count}</div>
+        <div>useCallback + function closure</div>
+        <div>
+          state is passed to the factory function where it is copied so it can
+          be used via lexical scope by the increase function
+        </div>
+        <div>
+          it requires it to be the only one place where state is changed
+        </div>
       </div>
-      <div className="example__button">
-        {props.isUnder10 ? <p>under 10 </p> : <p>above 10 </p>}
-        <button onClick={props.increase}>increment</button>
-      </div>
-
+      <MemoizedChildComponent
+        isBelowThreshold={count < THRESHOLD}
+        increment={increment}
+        decrement={decrement}
+      />
     </div>
   );
 }
-
-const MemoizedComponent = memo(SlowComponent);

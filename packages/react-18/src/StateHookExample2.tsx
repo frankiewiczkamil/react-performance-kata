@@ -1,31 +1,37 @@
-import { useState, memo } from "react";
+import { memo, useState } from 'react';
+import { THRESHOLD } from './common';
 
-let currentIncreaseCallback = () => {
-};
+let currentIncrementCallback = () => {};
+let currentDecrementCallback = () => {};
 
 // this reference does not change
-const increaseRef = () => currentIncreaseCallback();
+const incrementRef = () => currentIncrementCallback();
+const decrementRef = () => currentDecrementCallback();
 
 export default function () {
-  console.log("render container");
+  console.log('render container');
   const [count, setCount] = useState(0);
-  currentIncreaseCallback = () => setCount(count + 1);
-  const isUnder10 = count < 10;
-  return <MemoizedComponent isUnder10={isUnder10} />;
+  currentIncrementCallback = () => setCount(count + 1);
+  return <MemoizedComponent isBelowThreshold={count < THRESHOLD} />;
 }
 
-function SlowComponent(props: { isUnder10: boolean }) {
-  console.log("render component", props.isUnder10);
+function SlowComponent(props: { isBelowThreshold: boolean }) {
+  console.log('render component', props.isBelowThreshold);
   return (
     <div className="example__container">
       <div className="example__label">
         <div>useState - workaround 2: </div>
-        <div>handler function is a ref to a function that changes under the hood</div>
-        <div>accessed directly because it's in visible scope</div>
+        <div>external wrappers with static references</div>
+        <div>accessed directly instead of passing props</div>
       </div>
       <div className="example__button">
-        {props.isUnder10 ? <p>under 10 </p> : <p>above 10 </p>}
-        <button onClick={increaseRef}>increment</button>
+        <p>
+          {props.isBelowThreshold ? 'below' : 'above'}
+          &nbsp;
+          {THRESHOLD}
+        </p>
+        <button onClick={incrementRef}>increment</button>
+        <button onClick={decrementRef}>decrement</button>
       </div>
     </div>
   );
