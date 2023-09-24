@@ -1,8 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background-color: black;
-  color: white;
+ font-family: "Trebuchet MS", Helvetica, sans-serif;
   box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: rgb(232, 232, 203);
+    background-color: rgb(23, 23, 32);
+  }
 }
 
 .example__container {
