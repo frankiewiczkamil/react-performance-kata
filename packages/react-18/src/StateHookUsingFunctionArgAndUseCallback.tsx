@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { MemoizedChildComponent, THRESHOLD } from './common';
 
 export default function () {
   const [count, setCount] = useState(0);
-  const increment = () => setCount(count + 1); // <- creates new reference on every run (!)
-  const decrement = () => setCount(count - 1); // <- creates new reference on every run (!)
+  const increment = useCallback(() => setCount((count) => count + 1), []);
+  const decrement = useCallback(() => setCount((count) => count - 1), []);
   console.log('render container', count);
   return (
     <div className="example__container">
       <div className="example__label">
         <div>{count}</div>
-        <h3>the problem</h3>
+        <h3>best solution</h3>
         <div>
-          callback functions for increment/decrement get new value and new
-          REFERENCE on each run
+          memoized function that does not require self state as dependency,
+          because setter uses callback as an argument instead of fixed value
         </div>
       </div>
       <MemoizedChildComponent

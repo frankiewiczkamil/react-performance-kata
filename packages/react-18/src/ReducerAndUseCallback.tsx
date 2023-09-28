@@ -16,6 +16,7 @@ export default function () {
     <div className="example__container">
       <div className="example__label">
         <div>{count}</div>
+        <h4>good solution</h4>
         <div>useReducer + useCallback</div>
         <div>
           created memoized functions using reducer's dispatch (just like in

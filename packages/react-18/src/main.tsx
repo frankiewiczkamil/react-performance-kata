@@ -10,6 +10,7 @@ import StateHookWithUseCallbackAndClosure from './StateHookWithUseCallbackAndClo
 import StateHookWithExternalWrappersAndStaticReferencesWithoutProps from './StateHookWithExternalWrappersAndStaticReferencesWithoutProps';
 import StateHookWithGenericSolutionBasedOnUseCallbackAndUseRef from './StateHookWithGenericSolutionBasedOnUseCallbackAndUseRef';
 import ReducerAndUseCallback from './ReducerAndUseCallback';
+import StateHookUsingFunctionArgAndUseCallback from './StateHookUsingFunctionArgAndUseCallback';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -32,6 +33,7 @@ root.render(
       <StateHookWithUseCallbackAndStateFromUseRef />
       <StateHookWithGenericSolutionBasedOnUseCallbackAndUseRef />
 
+      <StateHookUsingFunctionArgAndUseCallback />
       <ReducerAndUseCallback />
     </div>
   </StrictMode>
